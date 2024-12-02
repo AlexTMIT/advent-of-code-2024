@@ -15,15 +15,27 @@ public class Main {
             int[] levels = Arrays.stream(line.split(" "))
                                  .mapToInt(Integer::parseInt)
                                  .toArray();
-        
-            if (isSafe(levels, 0, 0)) {
-                count1++;
-            } else if (isDampenenerSafe(levels, 0)) {
-                count2++;
-            }
+            
+            if (isSafe(levels, 0, 0)) count1++;
+            else if (isDampenerSafe(levels)) count2++;
         }
 
         System.out.println("Solution 1: " + count1); // 591
+        System.out.println("Solution 2: " + (count1 + count2)); // 621
+    }
+
+    public static boolean isDampenerSafe(int[] levels) {
+        int[] a = new int[levels.length - 1];
+
+        for (int index = 0; index < levels.length; index++) {
+            for (int i = 0, j = 0; i < levels.length; i++) { // sorry professors for quadratic time complexity
+                if (i != index) a[j++] = levels[i];
+            }
+
+            if (isSafe(a, 0, 0)) return true;
+        }
+
+        return false;
     }
 
     public static boolean isSafe(int[] levels, int i, int inc) {
