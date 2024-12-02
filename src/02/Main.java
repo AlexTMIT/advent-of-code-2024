@@ -22,6 +22,8 @@ public class Main {
 
         System.out.println("Solution 1: " + count1); // 591
         System.out.println("Solution 2: " + (count1 + count2)); // 621
+
+        in.close();
     }
 
     public static boolean isDampenerSafe(int[] levels) {
