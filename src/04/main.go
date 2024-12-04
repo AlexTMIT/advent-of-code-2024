@@ -8,7 +8,6 @@ import (
 )
 
 const n = 140 // 10 for test, 140 for input
-
 var grid = make([][]string, n)
 
 func main() {
@@ -44,11 +43,12 @@ func countOccurrences() int {
 
 	for y, row := range grid {
 		for x, char := range row {
-			if char == "X" {
-				for _, dir := range directions {
-					if matchesPattern(x, y, dir.dx, dir.dy) {
-						count++
-					}
+			if char != "X" {
+				continue
+			}
+			for _, dir := range directions {
+				if matchesPattern(x, y, dir.dx, dir.dy) {
+					count++
 				}
 			}
 		}
