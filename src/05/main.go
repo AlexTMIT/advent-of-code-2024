@@ -1,7 +1,6 @@
 package main
 
 import (
-	"bufio"
 	"log"
 	"os"
 	"strconv"
@@ -16,48 +15,39 @@ var seen = make([]bool, 100)
 var updates = make([][]int, 0)
 
 func main() {
-	readInput("input.txt")
+	content, _ := os.ReadFile("input.txt")
+	sections := strings.Split(string(content), "\n\n")
+
+	parseRules(sections[0])
+	parseUpdates(sections[1])
 	reviewUpdates()
 
-	log.Printf("Solution 1: %d", count1)
-	log.Printf("Solution 2: %d", count2)
+	log.Printf("Solution 1: %d", count1) // 7365
+	log.Printf("Solution 2: %d", count2) // 5770
 }
 
-func readInput(filename string) {
-	file, _ := os.Open(filename)
-	defer file.Close()
-
-	scanner := bufio.NewScanner(file)
-	for scanner.Scan() {
-		line := scanner.Text()
-
-		if line == "" {
-			continue
-		} else if line[2] == '|' {
-			addRule(line)
-		} else {
-			addUpdate(line)
+func parseRules(data string) {
+	for _, line := range strings.Split(data, "\n") {
+		if parts := strings.Split(line, "|"); len(parts) == 2 {
+			r, _ := strconv.Atoi(parts[1])
+			l, _ := strconv.Atoi(parts[0])
+			rules[r] = append(rules[r], l)
 		}
 	}
 }
 
-func addUpdate(line string) {
-	parts := strings.Split(line, ",")
-	update := make([]int, len(parts))
-
-	for i, part := range parts {
-		page, _ := strconv.Atoi(part)
-		update[i] = page
+func parseUpdates(data string) {
+	for _, line := range strings.Split(data, "\n") {
+		if line == "" {
+			continue
+		}
+		var update []int
+		for _, p := range strings.Split(line, ",") {
+			page, _ := strconv.Atoi(p)
+			update = append(update, page)
+		}
+		updates = append(updates, update)
 	}
-
-	updates = append(updates, update)
-}
-
-func addRule(line string) {
-	parts := strings.Split(line, "|")
-	l, _ := strconv.Atoi(parts[0])
-	r, _ := strconv.Atoi(parts[1])
-	rules[r] = append(rules[r], l)
 }
 
 func reviewUpdates() {
