@@ -1,3 +1,8 @@
+/*
+For a good solution, see William Ford's. It's 22 lines. Bruh.
+https://github.com/quintal-william/advent-of-code-2024/tree/main/src/year2024
+*/
+
 package main
 
 import (
