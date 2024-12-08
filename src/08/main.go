@@ -50,7 +50,7 @@ func readInput(filename string) {
 func locateAntinodes() {
 	for _, as := range antennas {
 		for x, a := range as {
-			antinodes[a] = true // part 2
+			antinodes[a] = true // part 2 (thanks to quintal william for adding this line haha)
 			compute(a, as[x+1:])
 		}
 	}
