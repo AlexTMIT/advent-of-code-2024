@@ -7,8 +7,6 @@ import (
 	"strings"
 )
 
-var count = 0
-
 var maxX = 0
 var maxY = 0
 
@@ -23,8 +21,7 @@ type coord struct {
 func main() {
 	readInput("input.txt")
 	locateAntinodes()
-	count = len(antinodes)
-	log.Printf("Solution: %d", count)
+	log.Printf("Solution: %d", len(antinodes))
 }
 
 func readInput(filename string) {
