@@ -50,6 +50,7 @@ func readInput(filename string) {
 func locateAntinodes() {
 	for _, as := range antennas {
 		for x, a := range as {
+			antinodes[a] = true // part 2
 			compute(a, as[x+1:])
 		}
 	}
@@ -70,11 +71,11 @@ func compute(a coord, antennas []coord) {
 
 	if !isOutOfBounds(c1) {
 		antinodes[c1] = true
-		// markLines(diff, c1) // part 2
+		markLines(diff, c1) // part 2
 	}
 	if !isOutOfBounds(c2) {
 		antinodes[c2] = true
-		// markLines(diff, c2) // part 2
+		markLines(diff, c2) // part 2
 	}
 
 	compute(a, antennas[1:])
