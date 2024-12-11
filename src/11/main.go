@@ -17,7 +17,7 @@ var stones = map[int]int{
 }
 
 func main() {
-	blink(75) // limit seems to be 124
+	blink(75) // turns negative after 124
 	log.Printf("Solution: %d\n", count())
 }
 
