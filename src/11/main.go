@@ -46,8 +46,7 @@ func evolveStone(num, count int, result map[int]int) {
 		result[left] += count
 		result[right] += count
 	} else {
-		xmasNum := num * 2024
-		result[xmasNum] += count
+		result[num*2024] += count
 	}
 }
 
